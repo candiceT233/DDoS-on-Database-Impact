@@ -1,0 +1,71 @@
+MongoDB shell version v5.0.15
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("dfbeb52f-fe81-428f-83ff-d87aba9c2e71") }
+MongoDB server version: 5.0.15
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+switched to db ycsb
+{
+	"ok" : 1,
+	"$clusterTime" : {
+		"clusterTime" : Timestamp(1679460092, 11),
+		"signature" : {
+			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+			"keyId" : NumberLong(0)
+		}
+	},
+	"operationTime" : Timestamp(1679460092, 9)
+}
+{
+	"ok" : 1,
+	"$clusterTime" : {
+		"clusterTime" : Timestamp(1679460092, 12),
+		"signature" : {
+			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+			"keyId" : NumberLong(0)
+		}
+	},
+	"operationTime" : Timestamp(1679460092, 12)
+}
+{
+	"collectionsharded" : "ycsb.usertable",
+	"ok" : 1,
+	"$clusterTime" : {
+		"clusterTime" : Timestamp(1679460092, 41),
+		"signature" : {
+			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+			"keyId" : NumberLong(0)
+		}
+	},
+	"operationTime" : Timestamp(1679460092, 37)
+}
+{
+	"version" : Timestamp(1, 1),
+	"versionEpoch" : ObjectId("641a86fcc02e9ebfe9a8e092"),
+	"versionTimestamp" : Timestamp(1679460092, 20),
+	"ok" : 1,
+	"$clusterTime" : {
+		"clusterTime" : Timestamp(1679460092, 41),
+		"signature" : {
+			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+			"keyId" : NumberLong(0)
+		}
+	},
+	"operationTime" : Timestamp(1679460092, 41)
+}
+
+Shard replshard0 at replshard0/127.0.0.1:37017
+ data : 0B docs : 0 chunks : 2
+ estimated data per chunk : 0B
+ estimated docs per chunk : 0
+
+Totals
+ data : 0B docs : 0 chunks : 2
+ Shard replshard0 contains 0% data, 0% docs in cluster, avg obj size on shard : 0B
+
+bye

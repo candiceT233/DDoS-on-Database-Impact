@@ -1,0 +1,24 @@
+MongoDB shell version v5.0.15
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("306056a3-4ee8-4431-a419-a068ec5a8289") }
+MongoDB server version: 5.0.15
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+{
+	"shardAdded" : "replshard0",
+	"ok" : 1,
+	"$clusterTime" : {
+		"clusterTime" : Timestamp(1679460092, 7),
+		"signature" : {
+			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
+			"keyId" : NumberLong(0)
+		}
+	},
+	"operationTime" : Timestamp(1679460092, 7)
+}
+bye
