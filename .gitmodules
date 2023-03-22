@@ -1,0 +1,6 @@
+[submodule "tools/PAT"]
+	path = tools/PAT
+	url = https://github.com/asonje/PAT
+[submodule "tools/MHDDoS"]
+	path = tools/MHDDoS
+	url = https://github.com/MatrixTM/MHDDoS
