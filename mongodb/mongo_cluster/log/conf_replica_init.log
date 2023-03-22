@@ -1,10 +1,10 @@
 MongoDB shell version v5.0.15
 connecting to: mongodb://127.0.0.1:57040/?compressors=disabled&gssapiServiceName=mongodb
-Implicit session: session { "id" : UUID("aa654bf2-3c0b-484f-bfe1-a443693d8a0b") }
+Implicit session: session { "id" : UUID("fc27ca80-7352-4495-bf31-796031290d14") }
 MongoDB server version: 5.0.15
 {
 	"topologyVersion" : {
-		"processId" : ObjectId("641a86eef4a2c2069d9e50bc"),
+		"processId" : ObjectId("641a88b715863016329feb70"),
 		"counter" : NumberLong(5)
 	},
 	"hosts" : [
@@ -19,21 +19,21 @@ MongoDB server version: 5.0.15
 	"electionId" : ObjectId("7fffffff0000000000000001"),
 	"lastWrite" : {
 		"opTime" : {
-			"ts" : Timestamp(1679460081, 8),
+			"ts" : Timestamp(1679460538, 9),
 			"t" : NumberLong(1)
 		},
-		"lastWriteDate" : ISODate("2023-03-22T04:41:21Z"),
+		"lastWriteDate" : ISODate("2023-03-22T04:48:58Z"),
 		"majorityOpTime" : {
-			"ts" : Timestamp(1679460081, 1),
+			"ts" : Timestamp(1679460538, 1),
 			"t" : NumberLong(-1)
 		},
-		"majorityWriteDate" : ISODate("2023-03-22T04:41:21Z")
+		"majorityWriteDate" : ISODate("2023-03-22T04:48:58Z")
 	},
 	"configsvr" : 2,
 	"maxBsonObjectSize" : 16777216,
 	"maxMessageSizeBytes" : 48000000,
 	"maxWriteBatchSize" : 100000,
-	"localTime" : ISODate("2023-03-22T04:41:21.359Z"),
+	"localTime" : ISODate("2023-03-22T04:48:58.425Z"),
 	"logicalSessionTimeoutMinutes" : 30,
 	"connectionId" : 2,
 	"minWireVersion" : 0,
@@ -44,13 +44,13 @@ MongoDB server version: 5.0.15
 		"lastOpTime" : Timestamp(0, 0),
 		"electionId" : ObjectId("7fffffff0000000000000001")
 	},
-	"lastCommittedOpTime" : Timestamp(1679460081, 1),
+	"lastCommittedOpTime" : Timestamp(1679460538, 1),
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679460081, 9),
+		"clusterTime" : Timestamp(1679460538, 10),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679460081, 8)
+	"operationTime" : Timestamp(1679460538, 9)
 }

@@ -18,7 +18,7 @@ MONGO_SHARD_SRV_DIR=${MONGODB_CLUSTER}/mongod_shard
 MONGO_ROUTER_SRV_DIR=${MONGODB_CLUSTER}/mongos
 
 mkdir -p $MONGODB_CLUSTER
-echo "run: sudo chown $USER:$USER $MONGODB_CLUSTER; sudo chown $USER:$USER $MONGODB_CLUSTER/*"
+echo "if permission denied, run: sudo chown $USER:$USER $MONGODB_CLUSTER $MONGODB_CLUSTER/*"
 mkdir -p $MONGO_CONF_SRV_DIR $MONGO_SHARD_SRV_DIR $MONGO_ROUTER_SRV_DIR
 
 MONGODB_LOGS=/usr/local/mongodb/logs

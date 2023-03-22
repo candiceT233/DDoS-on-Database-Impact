@@ -15,7 +15,7 @@ username=$USER
 # source env_var.sh
 
 SCRIPT_DIR=$HOME/scripts/DDoS-on-Database-Impact
-MONGO_SCRIPT_DIR=${SCRIPT_DIR}/mongodb/mongo_install
+MONGO_SCRIPT_DIR=${SCRIPT_DIR}/mongodb/mongo_cluster
 SERVER_HOST_FILE_DIR=${SCRIPT_DIR}/ip_files
 MONGODB_CLUSTER=/mnt/mongodb
 

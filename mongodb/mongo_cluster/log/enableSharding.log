@@ -1,6 +1,6 @@
 MongoDB shell version v5.0.15
 connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
-Implicit session: session { "id" : UUID("dfbeb52f-fe81-428f-83ff-d87aba9c2e71") }
+Implicit session: session { "id" : UUID("cd36f970-e9e3-401b-8faa-d13f8edb7e0a") }
 MongoDB server version: 5.0.15
 ================
 Warning: the "mongo" shell has been superseded by "mongosh",
@@ -13,50 +13,50 @@ switched to db ycsb
 {
 	"ok" : 1,
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679460092, 11),
+		"clusterTime" : Timestamp(1679460548, 11),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679460092, 9)
+	"operationTime" : Timestamp(1679460548, 9)
 }
 {
 	"ok" : 1,
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679460092, 12),
+		"clusterTime" : Timestamp(1679460548, 12),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679460092, 12)
+	"operationTime" : Timestamp(1679460548, 12)
 }
 {
 	"collectionsharded" : "ycsb.usertable",
 	"ok" : 1,
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679460092, 41),
+		"clusterTime" : Timestamp(1679460548, 41),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679460092, 37)
+	"operationTime" : Timestamp(1679460548, 37)
 }
 {
 	"version" : Timestamp(1, 1),
-	"versionEpoch" : ObjectId("641a86fcc02e9ebfe9a8e092"),
-	"versionTimestamp" : Timestamp(1679460092, 20),
+	"versionEpoch" : ObjectId("641a88c48a225bb748426425"),
+	"versionTimestamp" : Timestamp(1679460548, 20),
 	"ok" : 1,
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679460092, 41),
+		"clusterTime" : Timestamp(1679460548, 41),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679460092, 41)
+	"operationTime" : Timestamp(1679460548, 41)
 }
 
 Shard replshard0 at replshard0/127.0.0.1:37017
