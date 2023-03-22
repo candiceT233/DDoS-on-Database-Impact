@@ -6,9 +6,9 @@ INSTALL_DIR=$HOME/install
 DL_DIR=$HOME/download
 SCRIPT_DIR=$HOME/scripts/DDoS-on-Database-Impact
 
-sudo mkdir -p $INSTALL_DIR
-sudo mkdir -p $DL_DIR
-sudo mkdir -p $SCRIPT_DIR
+mkdir -p $INSTALL_DIR
+mkdir -p $DL_DIR
+mkdir -p $SCRIPT_DIR
 
 
 username=$USER
@@ -26,8 +26,8 @@ REDIS_LOGS=/usr/local/redis/logs
 BEEGFS_LOGS=/usr/local/beegfs/logs
 
 
-
-MONGO_DIR=/home/$USER/install/mongodb/bin # changed folder 
+MONGODB_PATH=$INSTALL_DIR/mongodb
+MONGO_BIN=$MONGODB_PATH/bin # changed folder 
 CONFIG_SVR_PORT=57040
 SHARD_SVR_PORT=37017
 ROUTER_SVR_PORT=27017

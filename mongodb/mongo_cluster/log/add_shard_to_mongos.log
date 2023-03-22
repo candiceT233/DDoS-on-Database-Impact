@@ -1,6 +1,6 @@
 MongoDB shell version v5.0.15
 connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
-Implicit session: session { "id" : UUID("55a69e06-1133-4ca6-a00c-752fa8f14584") }
+Implicit session: session { "id" : UUID("d68f620a-0fbc-404c-b4c9-29af99c33429") }
 MongoDB server version: 5.0.15
 ================
 Warning: the "mongo" shell has been superseded by "mongosh",
@@ -13,12 +13,12 @@ https://docs.mongodb.com/mongodb-shell/install/
 	"shardAdded" : "replshard0",
 	"ok" : 1,
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679460548, 7),
+		"clusterTime" : Timestamp(1679462085, 7),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679460548, 7)
+	"operationTime" : Timestamp(1679462085, 7)
 }
 bye

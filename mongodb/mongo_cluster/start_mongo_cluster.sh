@@ -27,7 +27,7 @@ wait
 
 # Start config server
 echo "Start each config server instance in mongo cluster ..."
-CONF_SRV_BIN=${MONGO_DIR}/mongod
+CONF_SRV_BIN=${MONGO_BIN}/mongod
 for conf_srv in ${CONFIG_SERVER_LIST[@]}
 do
   ssh ${conf_srv} "sh -c \"${CONF_SRV_BIN} --config ${MONGO_CONF_SRV_DIR}/${CONFIG_SVR_CONF_FILE} --fork > /dev/null 2>&1 \""
@@ -56,7 +56,7 @@ done
 echo -e "\t\t]\n\t}\n)" >> ${CWD}/conf_repl_init.js
 # step2: Init the config server
 first_config_server=`head -1 ${CWD}/conf_servers`
-CLIENT_BIN=${MONGO_DIR}/mongo
+CLIENT_BIN=${MONGO_BIN}/mongo
 mkdir -p ${CWD}/log
 ${CLIENT_BIN} --host ${first_config_server} --port ${CONFIG_SVR_PORT} < ${CWD}/conf_repl_init.js > ${CWD}/log/conf_replica_init.log
 cat ${CWD}/log/conf_replica_init.log | grep -i ok
@@ -81,7 +81,7 @@ done
 
 # Start shard server
 echo "Start each shard server instance in mongo cluster ..."
-SHARD_SRV_BIN=${MONGO_DIR}/mongod
+SHARD_SRV_BIN=${MONGO_BIN}/mongod
 for shard_server in ${SHARD_SERVER_LIST[@]}
 do
   ssh ${shard_server} "sh -c \"${SHARD_SRV_BIN} --config ${MONGO_SHARD_SRV_DIR}/${SHARD_SVR_CONF_FILE} --fork > /dev/null 2>&1\""
@@ -126,7 +126,7 @@ do
 done
 
 echo "Start each router server instance in mongo cluster ..."
-ROUTER_SRV_BIN=${MONGO_DIR}/mongos
+ROUTER_SRV_BIN=${MONGO_BIN}/mongos
 for router in ${router_SERVER_LIST[@]}
 do
   ssh ${router} "sh -c \"${ROUTER_SRV_BIN} --config ${MONGO_ROUTER_SRV_DIR}/${ROUTER_CONF_FILE} --fork > /dev/null 2>&1\""
