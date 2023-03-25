@@ -22,11 +22,11 @@ BEEGFS_CONF_DIR=$BEEEGFS_SCRIPT_DIR/configs
 
 sudo mkdir -p $BEEGFS_DATA
 sudo mkdir -p $BEEGFS_CLUSTER
-sudo mkdir -p $BEEGFS_LOGS
+# sudo mkdir -p $BEEGFS_LOGS
 
-sudo chown $USER:$USER $BEEGFS_DATA
-sudo chown $USER:$USER $BEEGFS_CLUSTER
-sudo chown $USER:$USER $BEEGFS_LOGS
+# sudo chown $USER:$USER $BEEGFS_DATA
+# sudo chown $USER:$USER $BEEGFS_CLUSTER
+# sudo chown $USER:$USER $BEEGFS_LOGS
 
 echo "If permission denied, run: sudo chown $USER:$USER $BEEGFS_DATA"
 
@@ -65,6 +65,10 @@ start_beegfs_server () {
 
 start_beegfs_client () {
     sudo systemctl start beegfs-helperd
+
+    sudo /etc/init.d/beegfs-client rebuild
+    sudo /etc/init.d/beegfs-client restart
+    
     sudo systemctl start beegfs-client
 
     sudo systemctl status beegfs-helperd beegfs-client
@@ -74,9 +78,10 @@ start_beegfs_client () {
 stop_beegfs_server () {
     echo "stop_beegfs_server"
 
-    sudo systemctl stop beegfs-storage
-    sudo systemctl stop beegfs-meta
-    sudo systemctl stop beegfs-mgmtd
+    # sudo systemctl stop beegfs-storage
+    # sudo systemctl stop beegfs-meta
+    # sudo systemctl stop beegfs-mgmtd
+    systemctl stop beegfs\*
 
     sudo systemctl status beegfs-mgmtd beegfs-meta beegfs-storage
 }
@@ -87,22 +92,33 @@ stop_beegfs_client () {
     sudo systemctl stop beegfs-client
     sudo systemctl stop beegfs-helperd
 
+    
     sudo systemctl status beegfs-helperd beegfs-client
     
 }
 
 case "$1" in
-	start) clear_cache
-            start_beegfs_server
-            start_beegfs_client
-	       ;;
+	start) 
+        clear_cache
+        start_beegfs_server
+        start_beegfs_client
+        ;;
 
-	stop) stop_beegfs_client
-            stop_beegfs_server
-            clean_path
-	      ;;
-    config) beegfs_config
+	stop) 
+        stop_beegfs_client
+        stop_beegfs_server
+        clean_path
+	    ;;
+    restart)
+        stop_beegfs_client
+        stop_beegfs_server
+        clean_path
+        start_beegfs_server
+        start_beegfs_client
           ;;
+    config) 
+        beegfs_config
+        ;;
 	
 	*) echo "unknown command"
 	   exit
