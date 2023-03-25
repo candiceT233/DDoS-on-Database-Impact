@@ -1,5 +1,9 @@
 # DDoS-on-Database-Impact
 Term Project for CS558 Advanced Computer Security at Illinois Tech.
+The env_var.sh has most of the directory setup information. 
+- All the /bin,/lib,/include of installed packages are stored in the `$HOME/install` directory. 
+- All the downloaded files are stored in the `$HOME/download` directory.
+- The github scripts are place in the `$HOME/script` directory.
 
 ## install_scripts
 Script to install all databases.
@@ -23,8 +27,14 @@ cd mongodb
 Script to start and stop BeeGFS server and client
 ```
 cd beegfs
+./beegfs.sh config
 ./beegfs.sh start
 ./beegfs.sh stop
+```
+* VERSION 7.3.3 tested working for client with Kernel 5.15, but not working with Kernel 5.19 due to failuer of building kernel module:
+```
+/opt/beegfs/src/client/client_module_7/build/../source/common/nodes/NodeConnPool.c:162:34: error: ‘struct task_struct’ has no member named ‘cpu’
+  162 |    int numa = cpu_to_node(current->cpu);
 ```
 
 ## redis/rocks_db
