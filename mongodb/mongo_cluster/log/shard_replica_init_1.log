@@ -1,6 +1,6 @@
 MongoDB shell version v5.0.15
-connecting to: mongodb://127.0.0.1:37017/?compressors=disabled&gssapiServiceName=mongodb
-Implicit session: session { "id" : UUID("317b1135-5fe5-48c4-9514-d5ea993cd1f2") }
+connecting to: mongodb://192.168.1.104:37017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("07404d1c-2943-4662-90a1-b0bdd1164919") }
 MongoDB server version: 5.0.15
 ================
 Warning: the "mongo" shell has been superseded by "mongosh",

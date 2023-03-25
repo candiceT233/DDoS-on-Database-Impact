@@ -2,7 +2,7 @@ rs.initiate(
 	{
 		_id: "replshard0",
 		members: [
-			{ _id : 0, host : "127.0.0.1:37017" }
+			{ _id : 0, host : "192.168.1.104:37017" }
 		]
 	}
 )

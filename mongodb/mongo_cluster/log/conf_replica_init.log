@@ -1,39 +1,39 @@
 MongoDB shell version v5.0.15
-connecting to: mongodb://127.0.0.1:57040/?compressors=disabled&gssapiServiceName=mongodb
-Implicit session: session { "id" : UUID("916f1b98-be08-4e8a-8a92-76b2e5309dd3") }
+connecting to: mongodb://192.168.1.104:57040/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("2079e374-3716-42a1-b038-b72087a27665") }
 MongoDB server version: 5.0.15
 {
 	"topologyVersion" : {
-		"processId" : ObjectId("641a8eb998f23d75b095b6e3"),
+		"processId" : ObjectId("641f473d6866d2027d9f74c3"),
 		"counter" : NumberLong(5)
 	},
 	"hosts" : [
-		"127.0.0.1:57040"
+		"192.168.1.104:57040"
 	],
 	"setName" : "replconfig01",
 	"setVersion" : 1,
 	"ismaster" : false,
 	"secondary" : true,
-	"primary" : "127.0.0.1:57040",
-	"me" : "127.0.0.1:57040",
+	"primary" : "192.168.1.104:57040",
+	"me" : "192.168.1.104:57040",
 	"electionId" : ObjectId("7fffffff0000000000000001"),
 	"lastWrite" : {
 		"opTime" : {
-			"ts" : Timestamp(1679462075, 10),
+			"ts" : Timestamp(1679771455, 9),
 			"t" : NumberLong(1)
 		},
-		"lastWriteDate" : ISODate("2023-03-22T05:14:35Z"),
+		"lastWriteDate" : ISODate("2023-03-25T19:10:55Z"),
 		"majorityOpTime" : {
-			"ts" : Timestamp(1679462075, 1),
+			"ts" : Timestamp(1679771455, 1),
 			"t" : NumberLong(-1)
 		},
-		"majorityWriteDate" : ISODate("2023-03-22T05:14:35Z")
+		"majorityWriteDate" : ISODate("2023-03-25T19:10:55Z")
 	},
 	"configsvr" : 2,
 	"maxBsonObjectSize" : 16777216,
 	"maxMessageSizeBytes" : 48000000,
 	"maxWriteBatchSize" : 100000,
-	"localTime" : ISODate("2023-03-22T05:14:35.644Z"),
+	"localTime" : ISODate("2023-03-25T19:10:55.560Z"),
 	"logicalSessionTimeoutMinutes" : 30,
 	"connectionId" : 2,
 	"minWireVersion" : 0,
@@ -44,13 +44,13 @@ MongoDB server version: 5.0.15
 		"lastOpTime" : Timestamp(0, 0),
 		"electionId" : ObjectId("7fffffff0000000000000001")
 	},
-	"lastCommittedOpTime" : Timestamp(1679462075, 1),
+	"lastCommittedOpTime" : Timestamp(1679771455, 1),
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679462075, 11),
+		"clusterTime" : Timestamp(1679771455, 10),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679462075, 10)
+	"operationTime" : Timestamp(1679771455, 9)
 }

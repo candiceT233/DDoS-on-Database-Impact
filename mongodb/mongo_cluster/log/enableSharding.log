@@ -1,6 +1,6 @@
 MongoDB shell version v5.0.15
-connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
-Implicit session: session { "id" : UUID("2143643c-97e8-49bd-b551-95fd488671cb") }
+connecting to: mongodb://192.168.1.104:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("8d1e30ac-053b-4629-af50-e43cad1ae8fb") }
 MongoDB server version: 5.0.15
 ================
 Warning: the "mongo" shell has been superseded by "mongosh",
@@ -13,53 +13,53 @@ switched to db ycsb
 {
 	"ok" : 1,
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679462085, 11),
+		"clusterTime" : Timestamp(1679771466, 10),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679462085, 9)
+	"operationTime" : Timestamp(1679771466, 8)
 }
 {
 	"ok" : 1,
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679462085, 12),
+		"clusterTime" : Timestamp(1679771466, 11),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679462085, 12)
+	"operationTime" : Timestamp(1679771466, 11)
 }
 {
 	"collectionsharded" : "ycsb.usertable",
 	"ok" : 1,
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679462085, 40),
+		"clusterTime" : Timestamp(1679771466, 40),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679462085, 37)
+	"operationTime" : Timestamp(1679771466, 36)
 }
 {
 	"version" : Timestamp(1, 1),
-	"versionEpoch" : ObjectId("641a8ec59f4c42eb0a9ef88b"),
-	"versionTimestamp" : Timestamp(1679462085, 20),
+	"versionEpoch" : ObjectId("641f474addd1222c7430305f"),
+	"versionTimestamp" : Timestamp(1679771466, 19),
 	"ok" : 1,
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679462085, 40),
+		"clusterTime" : Timestamp(1679771466, 40),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679462085, 40)
+	"operationTime" : Timestamp(1679771466, 40)
 }
 
-Shard replshard0 at replshard0/127.0.0.1:37017
+Shard replshard0 at replshard0/192.168.1.104:37017
  data : 0B docs : 0 chunks : 2
  estimated data per chunk : 0B
  estimated docs per chunk : 0

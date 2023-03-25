@@ -1,1 +1,1 @@
-sh.addShard("replshard0/127.0.0.1:37017")
+sh.addShard("replshard0/192.168.1.104:37017")

@@ -24,6 +24,8 @@ num_s="1" # 2, 4, 8?
 cmd=$1
 
 start_mongo_cluster(){
+    clean_mongo_cluster
+    clear_cache
     # start mongo cluster
     ${MONGO_SCRIPT_DIR}/start_mongo_cluster.sh
 }
@@ -31,6 +33,9 @@ start_mongo_cluster(){
 stop_mongo_cluster(){
     # stop mongo cluster
     ${MONGO_SCRIPT_DIR}/stop_mongo_cluster.sh
+}
+
+clean_mongo_cluster(){
     # clean mongo cluster
     ${MONGO_SCRIPT_DIR}/clean.sh
 }
@@ -69,12 +74,14 @@ SCRIPTNAME=$(basename "$0")
 
 case "$1" in
 
-	start) clear_cache
-            start_mongo_cluster
+	start) start_mongo_cluster
 	       ;;
 
 	stop) stop_mongo_cluster
 	      ;;
+    
+    clean) clean_mongo_cluster
+        ;;
 	
 	*) echo "unknown command"
 	   exit
