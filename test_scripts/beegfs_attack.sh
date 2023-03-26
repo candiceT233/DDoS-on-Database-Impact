@@ -19,7 +19,7 @@ MGMTD_PORT=8008
 # ATTACK_PORTS=( $STORAGE_PORT $CLIENT_PORT $META_PORT $HELPERD_PORT $MGMTD_PORT )
 # L4_METHODS=( UDP TCP CPS MCBOT MINECRAFT)
 ATTACK_PORTS=( $STORAGE_PORT )
-L4_METHODS=( UDP TCP )
+L4_METHODS=( TCP )
 
 attack_host=$(cat $SCRIPT_DIR/ip_files/${num_s}_servers_ip | head -n 1)
 
@@ -32,29 +32,65 @@ fi
 PAT_COL=$SCRIPT_DIR/bin/PAT/PAT-collecting-data
 PAT_POS=$SCRIPT_DIR/bin/PAT/PAT-postprocessing
 
-set -x
+
 
 source $SCRIPT_DIR/.ddos_test_env/bin/activate
 
-for port in ${ATTACK_PORTS[@]}; do
-    for method in ${L4_METHODS[@]}; do
-        echo "Attacking ${attack_host} port $port with method $method"
+start_server () {
+    set -x
 
-        # LATEST_DIR="$PAT_COL/results/latest"
-        # sed "s#RESULT_DIR#$LATEST_DIR#g" $SCRIPT_DIR/test_scripts/config.xml > $PAT_POS/config.xml
+    echo "Starting BeeGFS server and client"
+    cd $SCRIPT_DIR/beegfs
+    ./beegfs.sh start
 
-        TEST_CMD="echo python3 $SCRIPT_DIR/start.py $method $attack_host:$port; sleep 5"
-        echo "TEST_CMD: $TEST_CMD"
+    tail /usr/local/beegfs_logs/beegfs-client.log
 
-        sed "s#TEST_CMD#$TEST_CMD#g" $SCRIPT_DIR/test_scripts/config.template > $PAT_COL/config
-        sed -i "s#HOSTIP#$attack_host#g" $PAT_COL/config
-        
-        cd $PAT_COL && ./pat run
+    set +x
+}
 
-        # python3 $SCRIPT_DIR/start.py $method $attack_host:$port
-        mkdir -p $RESULT_DIR/${num_s}_servers_${method}_${port}
-        mv $PAT_COL/results/* $RESULT_DIR/${num_s}_servers_${method}_${port}/
+stop_server () {
+    set -x
 
-        sleep 5
+    echo "Stopping BeeGFS server and client"
+    cd $SCRIPT_DIR/beegfs
+    ./beegfs.sh stop
+
+    tail /usr/local/beegfs_logs/beegfs-client.log
+
+    set +x
+}
+
+ddos_attack () {
+
+    for port in ${ATTACK_PORTS[@]}; do
+        for method in ${L4_METHODS[@]}; do
+
+            start_server
+
+            echo "Attacking ${attack_host} port $port with method $method"
+
+            # LATEST_DIR="$PAT_COL/results/latest"
+            # sed "s#RESULT_DIR#$LATEST_DIR#g" $SCRIPT_DIR/test_scripts/config.xml > $PAT_POS/config.xml
+
+            TEST_CMD="stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 15s"
+            echo "TEST_CMD: $TEST_CMD"
+
+            sed "s#TEST_CMD#$TEST_CMD#g" $SCRIPT_DIR/test_scripts/config.template > $PAT_COL/config
+            sed -i "s#HOSTIP#$attack_host#g" $PAT_COL/config
+            
+            cd $PAT_COL && ./pat run
+
+            # python3 $SCRIPT_DIR/start.py $method $attack_host:$port
+            mkdir -p $RESULT_DIR/${num_s}_servers_${method}_${port}
+            mv $PAT_COL/results/2023-* $RESULT_DIR/${num_s}_servers_${method}_${port}
+
+            sleep 2
+
+            stop_server
+        done
     done
-done
+}
+
+
+ddos_attack
+
