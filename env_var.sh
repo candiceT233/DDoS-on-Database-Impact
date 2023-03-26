@@ -22,38 +22,30 @@ mkdir -p $BEEGFS_PATH
 # database directories -----------
 
 MONGODB_DATA=/data/mongodb
-REDIS_DATA=/data/redis
 BEEGFS_DATA=/data/beegfs
 
 MONGODB_CLUSTER=/mnt/mongodb
-REDIS_CLUSTER=/mnt/redis
 BEEGFS_CLUSTER=/mnt/beegfs
 
-MONGODB_LOGS=/usr/local/mongodb/logs
-REDIS_LOGS=/usr/local/redis/logs
-BEEGFS_LOGS=/usr/local/beegfs/logs
+MONGODB_LOGS=$MONGODB_CLUSTER/logs
+BEEGFS_LOGS=$BEEGFS_CLUSTER/logs
 
 sudo mkdir -p $MONGODB_DATA
-sudo mkdir -p $REDIS_DATA
 sudo mkdir -p $BEEGFS_DATA
 
 sudo mkdir -p $MONGODB_CLUSTER
-sudo mkdir -p $REDIS_CLUSTER
 sudo mkdir -p $BEEGFS_CLUSTER
 
-sudo mkdir -p $MONGODB_LOGS
+# sudo mkdir -p $MONGODB_LOGS
 sudo mkdir -p $REDIS_LOGS
 sudo mkdir -p $BEEGFS_LOGS
 
 sudo chown $USER:$USER $MONGODB_DATA
-sudo chown $USER:$USER $REDIS_DATA
 sudo chown $USER:$USER $BEEGFS_DATA
 
 sudo chown $USER:$USER $MONGODB_CLUSTER
-sudo chown $USER:$USER $REDIS_CLUSTER
 sudo chown $USER:$USER $BEEGFS_CLUSTER
 
-sudo chown $USER:$USER $MONGODB_LOGS
-sudo chown $USER:$USER $REDIS_LOGS
+# sudo chown $USER:$USER $MONGODB_LOGS
 sudo chown $USER:$USER $BEEGFS_LOGS
 

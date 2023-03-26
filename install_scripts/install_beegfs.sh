@@ -35,7 +35,11 @@ install_components () {
 
     for C in ${COMPONENTS[@]}
     do
-        wget $URL_PREFIX/$C.deb
+        if [ ! -f "$C.deb" ]; then
+            echo "downloading $C.deb"
+            wget $URL_PREFIX/$C.deb
+        fi
+        
         sudo dpkg -i $C.deb
     done
 

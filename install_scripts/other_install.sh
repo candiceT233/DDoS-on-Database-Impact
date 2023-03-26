@@ -1,0 +1,1 @@
+sudo apt install gawk sar perf
