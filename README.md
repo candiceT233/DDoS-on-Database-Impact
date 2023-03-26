@@ -54,5 +54,10 @@ cd test_scripts
 ./mongodb_attack.sh
 ```
 
+## TODO
+- Do L7 tests if can setup
+- Vary threads number
+- Vary test length
+
 
 
