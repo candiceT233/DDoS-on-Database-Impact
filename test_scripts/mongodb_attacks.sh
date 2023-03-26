@@ -8,18 +8,15 @@ RESULT_DIR=$SCRIPT_DIR/results
 mkdir -p $RESULT_DIR
 rm -rf $RESULT_DIR/*
 
-num_s="1"
+num_s="1" # 2, 4, 8?
 
-STORAGE_PORT=8003
-CLIENT_PORT=8004 #UDP
-META_PORT=8005
-HELPERD_PORT=8006
-MGMTD_PORT=8008
+MONGOD_PORT=57040
+MG_SHARD_PORT=37017
+MONGOS_PORT=27017
 
-ATTACK_PORTS=( $STORAGE_PORT $CLIENT_PORT $META_PORT $HELPERD_PORT $MGMTD_PORT )
-# L4_METHODS=( UDP TCP MCBOT MINECRAFT CPS )
-ATTACK_PORTS=( $STORAGE_PORT $META_PORT )
-L4_METHODS=( UDP TCP MCBOT )
+ATTACK_PORTS=( $MONGOD_PORT $MG_SHARD_PORT $MONGOS_PORT )
+# L4_METHODS=( UDP TCP CONNECTIONS CPS MCBOT MINECRAFT )
+L4_METHODS=( CONNECTION )
 
 THREADS=64
 DURATION=60
@@ -35,18 +32,16 @@ fi
 PAT_COL=$SCRIPT_DIR/bin/PAT/PAT-collecting-data
 PAT_POS=$SCRIPT_DIR/bin/PAT/PAT-postprocessing
 
-
-
 source $SCRIPT_DIR/.ddos_test_env/bin/activate
 
 start_server () {
     set -x
 
-    echo "Starting BeeGFS server and client"
-    cd $SCRIPT_DIR/beegfs
-    ./beegfs.sh start
+    echo "Starting MongoDB server and client"
+    cd $SCRIPT_DIR/mongodb
+    ./mongodb.sh start
 
-    tail /usr/local/beegfs_logs/beegfs-client.log
+    tail /mnt/mongodb/mongod/mongod.log
 
     set +x
 }
@@ -54,11 +49,11 @@ start_server () {
 stop_server () {
     set -x
 
-    echo "Stopping BeeGFS server and client"
-    cd $SCRIPT_DIR/beegfs
-    ./beegfs.sh stop
+    echo "Stopping MongoDB server and client"
+    cd $SCRIPT_DIR/mongodb
+    ./mongodb.sh stop
 
-    tail /usr/local/beegfs_logs/beegfs-client.log
+    tail /mnt/mongodb/mongod/mongod.log
 
     set +x
 }
@@ -105,6 +100,6 @@ ddos_attack () {
 
 ddos_attack
 
-mkdir $RESULT_DIR/${num_s}_servers_${THREADS}t${DURATION}s
-mv $RESULT_DIR/${num_s}_servers_* $RESULT_DIR/${num_s}_servers_${THREADS}t${DURATION}s/
+mkdir $RESULT_DIR/mongodb_${num_s}_servers_${THREADS}t${DURATION}s
+mv $RESULT_DIR/${num_s}_servers_* $RESULT_DIR/mongodb_${num_s}_servers_${THREADS}t${DURATION}s/
 

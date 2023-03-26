@@ -12,7 +12,6 @@ cd install_scripts
 ./install_beegfs.sh  
 ./install_montodb.sh mongod
 ./install_montodb.sh mongosh
-./install_redis.sh
 ```
 
 ## mongodb
@@ -41,11 +40,19 @@ cd beegfs
 TODO: add a additional database for test
 
 ## tools
-TODO: add Makefile for preparing test environment \
-(TODO: add perf tool setup if intelPAT does not work)
+#### PAT
+For measuring system performance (e.g. CPU, memory, and netwrok utilization).
+#### MHDDoS
+For generating DDOS attacks on started database. 
 
 ## test_scripts
-TODO: need to add test script
+Testscripts added for MongoDB and BeeGFS. \
+(TODO: may add 3rd database test).
+```
+cd test_scripts
+./beegfs_attack.sh  
+./mongodb_attack.sh
+```
 
 
 

@@ -1,6 +1,6 @@
 MongoDB shell version v5.0.15
 connecting to: mongodb://192.168.1.104:27017/?compressors=disabled&gssapiServiceName=mongodb
-Implicit session: session { "id" : UUID("8d1e30ac-053b-4629-af50-e43cad1ae8fb") }
+Implicit session: session { "id" : UUID("9f184e83-f587-444e-a4c9-4eb163daf468") }
 MongoDB server version: 5.0.15
 ================
 Warning: the "mongo" shell has been superseded by "mongosh",
@@ -13,50 +13,50 @@ switched to db ycsb
 {
 	"ok" : 1,
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679771466, 10),
+		"clusterTime" : Timestamp(1679812542, 11),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679771466, 8)
+	"operationTime" : Timestamp(1679812542, 9)
 }
 {
 	"ok" : 1,
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679771466, 11),
+		"clusterTime" : Timestamp(1679812542, 12),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679771466, 11)
+	"operationTime" : Timestamp(1679812542, 12)
 }
 {
 	"collectionsharded" : "ycsb.usertable",
 	"ok" : 1,
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679771466, 40),
+		"clusterTime" : Timestamp(1679812542, 41),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679771466, 36)
+	"operationTime" : Timestamp(1679812542, 37)
 }
 {
 	"version" : Timestamp(1, 1),
-	"versionEpoch" : ObjectId("641f474addd1222c7430305f"),
-	"versionTimestamp" : Timestamp(1679771466, 19),
+	"versionEpoch" : ObjectId("641fe7be6a96207a41b7f8b9"),
+	"versionTimestamp" : Timestamp(1679812542, 20),
 	"ok" : 1,
 	"$clusterTime" : {
-		"clusterTime" : Timestamp(1679771466, 40),
+		"clusterTime" : Timestamp(1679812542, 41),
 		"signature" : {
 			"hash" : BinData(0,"AAAAAAAAAAAAAAAAAAAAAAAAAAA="),
 			"keyId" : NumberLong(0)
 		}
 	},
-	"operationTime" : Timestamp(1679771466, 40)
+	"operationTime" : Timestamp(1679812542, 41)
 }
 
 Shard replshard0 at replshard0/192.168.1.104:37017
