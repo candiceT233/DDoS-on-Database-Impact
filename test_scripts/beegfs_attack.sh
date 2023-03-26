@@ -16,10 +16,13 @@ META_PORT=8005
 HELPERD_PORT=8006
 MGMTD_PORT=8008
 
-# ATTACK_PORTS=( $STORAGE_PORT $CLIENT_PORT $META_PORT $HELPERD_PORT $MGMTD_PORT )
-# L4_METHODS=( UDP TCP CPS MCBOT MINECRAFT)
-ATTACK_PORTS=( $STORAGE_PORT )
-L4_METHODS=( TCP )
+ATTACK_PORTS=( $STORAGE_PORT $CLIENT_PORT $META_PORT $HELPERD_PORT $MGMTD_PORT )
+# L4_METHODS=( UDP TCP MCBOT MINECRAFT CPS )
+ATTACK_PORTS=( $STORAGE_PORT $META_PORT )
+L4_METHODS=( UDP TCP MCBOT )
+
+THREADS=64
+DURATION=60
 
 attack_host=$(cat $SCRIPT_DIR/ip_files/${num_s}_servers_ip | head -n 1)
 
@@ -72,7 +75,9 @@ ddos_attack () {
             # LATEST_DIR="$PAT_COL/results/latest"
             # sed "s#RESULT_DIR#$LATEST_DIR#g" $SCRIPT_DIR/test_scripts/config.xml > $PAT_POS/config.xml
 
-            TEST_CMD="stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 15s"
+            # TEST_CMD="stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 15s"
+            TEST_CMD="python3 $SCRIPT_DIR/tools/MHDDoS/start.py $method $attack_host:$port $THREADS $DURATION"
+
             echo "TEST_CMD: $TEST_CMD"
 
             sed "s#TEST_CMD#$TEST_CMD#g" $SCRIPT_DIR/test_scripts/config.template > $PAT_COL/config
@@ -81,16 +86,25 @@ ddos_attack () {
             cd $PAT_COL && ./pat run
 
             # python3 $SCRIPT_DIR/start.py $method $attack_host:$port
-            mkdir -p $RESULT_DIR/${num_s}_servers_${method}_${port}
+            # mkdir -p $RESULT_DIR/${num_s}_servers_${method}_${port}
             mv $PAT_COL/results/2023-* $RESULT_DIR/${num_s}_servers_${method}_${port}
+            # mv $PAT_COL/results/2023-* mv $PAT_COL/results/latest
+            # cd $PAT_POS && python2 pat-post-process.py
 
-            sleep 2
+            echo "$(du -h ../results/${num_s}_servers_${method}_${port}/instruments/result_templatev1.xlsm)"
+            
+            #$RESULT_DIR/${num_s}_servers_${method}_${port}
 
             stop_server
+
+            sleep 2
         done
     done
 }
 
 
 ddos_attack
+
+mkdir $RESULT_DIR/${num_s}_servers
+mv $RESULT_DIR/${num_s}_servers_* $RESULT_DIR/${num_s}_servers/
 

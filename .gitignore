@@ -6,6 +6,7 @@ bin-release/
 tmp/
 logs/
 results/
+saved_results/
 
 # Other files and folders
 .settings/

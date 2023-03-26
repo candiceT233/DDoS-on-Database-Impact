@@ -46,8 +46,8 @@ WORKER_TMP_DIR: /tmp/PAT_TMP
 CMD_PATH: TEST_CMD
 
 # Delays before and after running the job, while the system is monitored
-#PRE_EXEC_DELAY: 5
-#POST_EXEC_DELAY: 5
+PRE_EXEC_DELAY: 5
+POST_EXEC_DELAY: 10
 
 # Interval to collect metric from  the system under test in seconds, please note for a long running jobs try to keep this number 3-5 seconds to avoid data overload
 SAMPLE_RATE: 1
