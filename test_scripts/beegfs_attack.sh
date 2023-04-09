@@ -18,12 +18,12 @@ HELPERD_PORT=8006
 MGMTD_PORT=8008
 
 ATTACK_PORTS=( $STORAGE_PORT $CLIENT_PORT $META_PORT $HELPERD_PORT $MGMTD_PORT )
-# L4_METHODS=( UDP TCP MCBOT MINECRAFT CPS )
-ATTACK_PORTS=( $STORAGE_PORT )
-L4_METHODS=( UDP )
+L4_METHODS=( UDP TCP MCBOT MINECRAFT CONNECTION CPS )
+# ATTACK_PORTS=( $STORAGE_PORT $CLIENT_PORT )
+# L4_METHODS=( UDP TCP )
 
 THREADS=64
-DURATION=20
+DURATION=60
 
 attack_host=$(cat $SCRIPT_DIR/ip_files/${num_s}_servers_ip | head -n 1)
 
@@ -31,7 +31,8 @@ if [ -d "$SCRIPT_DIR/bin/PAT" ]; then
     echo "PAT already installed"
 else
     echo "Installing PAT"
-    cp -r $SCRIPT_DIR/tools/PAT $SCRIPT_DIR/bin
+    mkdir $SCRIPT_DIR/bin/PAT
+    cp -r $SCRIPT_DIR/tools/PAT/* $SCRIPT_DIR/bin/PAT/
 fi
 PAT_COL=$SCRIPT_DIR/bin/PAT/PAT-collecting-data
 PAT_POS=$SCRIPT_DIR/bin/PAT/PAT-postprocessing
@@ -91,10 +92,10 @@ ddos_attack () {
             # LATEST_DIR="$PAT_COL/results/latest"
             # sed "s#RESULT_DIR#$LATEST_DIR#g" $SCRIPT_DIR/test_scripts/config.xml > $PAT_POS/config.xml
 
+            # TEST_CMD="stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 15s"
             # python3 $SCRIPT_DIR/tools/MHDDoS/start.py $method $attack_host:$port $THREADS $DURATION
 
             # Prepare and run PAT test
-            # TEST_CMD="stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 15s"
             TEST_CMD="python3 $SCRIPT_DIR/tools/MHDDoS/start.py $method $attack_host:$port $THREADS $DURATION"
 
             echo "TEST_CMD: $TEST_CMD"
@@ -122,8 +123,8 @@ ddos_attack () {
 }
 
 
-ddos_attack
+# ddos_attack
 
-mkdir $RESULT_DIR/${num_s}_servers_${THREADS}t${DURATION}s
-mv $RESULT_DIR/${num_s}_servers_* $RESULT_DIR/${num_s}_servers_${THREADS}t${DURATION}s/
+mkdir -p $SCRIPT_DIR/saved_results/beegfs_${num_s}_servers_${THREADS}t${DURATION}s
+mv $RESULT_DIR/${num_s}_servers_* $SCRIPT_DIR/saved_results/beegfs_${num_s}_servers_${THREADS}t${DURATION}s/
 
