@@ -27,9 +27,9 @@ echo "hosts_str=$hosts_str"
 
 
 clean_path () {
-    sudo rm -rf $BEEGFS_DATA $BEEGFS_CLUSTER $BEEGFS_LOGS
+    mpssh -f ${SERVER_HOST_FILE_DIR}/${num_s}_servers_ip "sudo rm -rf ${BEEGFS_DATA} ${BEEGFS_CLUSTER} ${BEEGFS_LOGS}"
     echo "$BEEGFS_DATA $BEEGFS_CLUSTER $BEEGFS_LOGS cleared ..."
-    sudo mkdir -p $BEEGFS_DATA $BEEGFS_CLUSTER $BEEGFS_LOGS
+    mpssh -f ${SERVER_HOST_FILE_DIR}/${num_s}_servers_ip "sudo mkdir -p ${BEEGFS_DATA} ${BEEGFS_CLUSTER} ${BEEGFS_LOGS}"
 }
 
 clear_cache(){
@@ -77,12 +77,12 @@ start_beegfs_server () {
     for node in "${hosts[@]}"
     do
         ssh ${node} /bin/bash << EOF
-sudo systemctl start beegfs-mgmtd 
-sudo systemctl start beegfs-meta
-sudo systemctl start beegfs-storage
+    sudo systemctl start beegfs-mgmtd 
+    sudo systemctl start beegfs-meta
+    sudo systemctl start beegfs-storage
 EOF
+done
     # sudo systemctl status beegfs-mgmtd beegfs-meta beegfs-storage
-
 }
 
 start_beegfs_client () {
@@ -95,11 +95,12 @@ sudo systemctl start beegfs-helperd
 sudo /etc/init.d/beegfs-client rebuild
 sudo systemctl start beegfs-client
 EOF
+done
 }
 
 stop_beegfs_server () {
     echo "Stopping BeeGFS Server ..."
-    mpssh -f ${SERVER_HOST_FILE_DIR}/${num_s}_servers_ip 'systemctl stop beegfs-storage beegfs-meta beegfs-mgmtd'
+    mpssh -f ${SERVER_HOST_FILE_DIR}/${num_s}_servers_ip 'sudo systemctl stop beegfs-storage beegfs-meta beegfs-mgmtd'
 
 }
 
