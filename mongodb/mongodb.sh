@@ -42,9 +42,9 @@ clean_mongo_cluster(){
 
 clear_cache(){
     # clear server system cache
-    #mpssh -f ${MONGO_SCRIPT_DIR}/shard_servers 'sudo su root -c "sync; echo 3 > /proc/sys/vm/drop_caches"'
+    mpssh -f ${MONGO_SCRIPT_DIR}/shard_servers 'sudo su root -c "sync; echo 3 > /proc/sys/vm/drop_caches"'
     # mpssh -f ${MONGO_SCRIPT_DIR}/shard_servers "sudo fm" > /dev/null 2>&1
-    sudo su root -c "sync; echo 3 > /proc/sys/vm/drop_caches"
+    # sudo su root -c "sync; echo 3 > /proc/sys/vm/drop_caches"
 }
 
 # modify "MONGODB_CLUSTER" in config file

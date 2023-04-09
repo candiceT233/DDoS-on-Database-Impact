@@ -10,10 +10,10 @@ else
 fi
 
 echo "Stopping MongoDB processes ..."
-# mpssh -f ${CWD}/conf_servers 'killall -9 mongod' > /dev/null
-# mpssh -f ${CWD}/shard_servers 'killall -9 mongod' > /dev/null
-# mpssh -f ${CWD}/router_servers 'killall -9 mongos' > /dev/null
+mpssh -f ${CWD}/conf_servers 'killall -9 mongod' > /dev/null
+mpssh -f ${CWD}/shard_servers 'killall -9 mongod' > /dev/null
+mpssh -f ${CWD}/router_servers 'killall -9 mongos' > /dev/null
 
-killall -9 mongod
+# killall -9 mongod
 
 echo "MongoDB cluster is stopped"

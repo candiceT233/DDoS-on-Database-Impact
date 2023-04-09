@@ -34,24 +34,30 @@ clean_path () {
 
 clear_cache(){
     # clear server system cache
-    #mpssh -f ${MONGO_SCRIPT_DIR}/shard_servers 'sudo su root -c "sync; echo 3 > /proc/sys/vm/drop_caches"'
+    mpssh -f ${SERVER_HOST_FILE_DIR}/${num_s}_servers_ip 'sudo su root -c "sync; echo 3 > /proc/sys/vm/drop_caches"'
     # mpssh -f ${MONGO_SCRIPT_DIR}/shard_servers "sudo fm" > /dev/null 2>&1
-    sudo su root -c "sync; echo 3 > /proc/sys/vm/drop_caches"
+    # sudo su root -c "sync; echo 3 > /proc/sys/vm/drop_caches"
 }
 
 beegfs_config () {
+    for node in "${hosts[@]}"
+    do
+        ssh ${node} /bin/bash << EOF
+sudo cp ${BEEGFS_CONF_DIR}/* /etc/beegfs/
 
-    sudo cp $BEEGFS_CONF_DIR/* /etc/beegfs/
+sudo ${BEEGFS_SBIN}/beegfs-setup-mgmtd -p ${BEEGFS_DATA}/beegfs_mgmtd
+sudo ${BEEGFS_SBIN}/beegfs-setup-meta -p ${BEEGFS_DATA}/beegfs_meta -s 2 -m "${hosts_str}"
+sudo ${BEEGFS_SBIN}/beegfs-setup-storage -p ${BEEGFS_DATA}/beegfs_storage -s 3 -i 301 -m "${hosts_str}"
+sudo ${BEEGFS_SBIN}/beegfs-setup-client -m "${hosts_str}"
 
-    sudo $BEEGFS_SBIN/beegfs-setup-mgmtd -p $BEEGFS_DATA/beegfs_mgmtd
-    sudo $BEEGFS_SBIN/beegfs-setup-meta -p $BEEGFS_DATA/beegfs_meta -s 2 -m "$hosts_str"
-    sudo $BEEGFS_SBIN/beegfs-setup-storage -p $BEEGFS_DATA/beegfs_storage -s 3 -i 301 -m "$hosts_str"
-    sudo $BEEGFS_SBIN/beegfs-setup-client -m "$hosts_str"
+sudo sed -i "s#/var/log/#/usr/local/beegfs_logs/#" /etc/beegfs/beegfs-mgmtd.conf
+sudo sed -i "s#/var/log/#/usr/local/beegfs_logs/#" /etc/beegfs/beegfs-meta.conf
+sudo sed -i "s#/var/log/#/usr/local/beegfs_logs/#" /etc/beegfs/beegfs-storage.conf
+sudo sed -i "s#/var/log/#/usr/local/beegfs_logs/#" /etc/beegfs/beegfs-helperd.conf
+exit
+EOF
+    done
 
-    sudo sed -i "s#/var/log/#/usr/local/beegfs_logs/#" /etc/beegfs/beegfs-mgmtd.conf
-    sudo sed -i "s#/var/log/#/usr/local/beegfs_logs/#" /etc/beegfs/beegfs-meta.conf
-    sudo sed -i "s#/var/log/#/usr/local/beegfs_logs/#" /etc/beegfs/beegfs-storage.conf
-    sudo sed -i "s#/var/log/#/usr/local/beegfs_logs/#" /etc/beegfs/beegfs-helperd.conf
 
     # sudo sed -i "s/connDisableAuthentication[[:space:]]*=[[:space:]]*false/connDisableAuthentication = true/g" /etc/beegfs/beegfs-mgmtd.conf
     # sudo sed -i "s/connDisableAuthentication[[:space:]]*=[[:space:]]*false/connDisableAuthentication = true/g" /etc/beegfs/beegfs-meta.conf
@@ -62,15 +68,19 @@ beegfs_config () {
 }
 
 check_beegfs_status () {
-    sudo systemctl status beegfs-mgmtd beegfs-meta beegfs-storage beegfs-helperd beegfs-client
+    mpssh -f ${SERVER_HOST_FILE_DIR}/${num_s}_servers_ip 'sudo systemctl status beegfs-mgmtd beegfs-meta beegfs-storage beegfs-helperd beegfs-client'
 }
 
 start_beegfs_server () {
     echo "Starting BeeGFS Server ..."
 
-    sudo systemctl start beegfs-mgmtd 
-    sudo systemctl start beegfs-meta
-    sudo systemctl start beegfs-storage
+    for node in "${hosts[@]}"
+    do
+        ssh ${node} /bin/bash << EOF
+sudo systemctl start beegfs-mgmtd 
+sudo systemctl start beegfs-meta
+sudo systemctl start beegfs-storage
+EOF
     # sudo systemctl status beegfs-mgmtd beegfs-meta beegfs-storage
 
 }
@@ -78,22 +88,24 @@ start_beegfs_server () {
 start_beegfs_client () {
     echo "Starting BeeGFS Client ..."
 
-    sudo systemctl start beegfs-helperd
-
-    sudo /etc/init.d/beegfs-client rebuild
-
-    sudo systemctl start beegfs-client
+    for node in "${hosts[@]}"
+    do
+        ssh ${node} /bin/bash << EOF
+sudo systemctl start beegfs-helperd
+sudo /etc/init.d/beegfs-client rebuild
+sudo systemctl start beegfs-client
+EOF
 }
 
 stop_beegfs_server () {
     echo "Stopping BeeGFS Server ..."
-    systemctl stop beegfs-storage beegfs-meta beegfs-mgmtd 
+    mpssh -f ${SERVER_HOST_FILE_DIR}/${num_s}_servers_ip 'systemctl stop beegfs-storage beegfs-meta beegfs-mgmtd'
 
 }
 
 stop_beegfs_client () {
     echo "Stopping BeeGFS Client ..."
-    sudo systemctl stop beegfs-client beegfs-helperd
+    mpssh -f ${SERVER_HOST_FILE_DIR}/${num_s}_servers_ip 'sudo systemctl stop beegfs-client beegfs-helperd'
 }
 
 case "$1" in

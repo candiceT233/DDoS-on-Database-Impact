@@ -10,21 +10,21 @@ else
 fi
 
 echo "Stopping MongoDB processes ..."
-# mpssh -f ${CWD}/conf_servers 'killall -9 mongod' > /dev/null
-# mpssh -f ${CWD}/shard_servers 'killall -9 mongod' > /dev/null
-# mpssh -f ${CWD}/router_servers 'killall -9 mongos' > /dev/null
+mpssh -f ${CWD}/conf_servers 'killall -9 mongod' > /dev/null
+mpssh -f ${CWD}/shard_servers 'killall -9 mongod' > /dev/null
+mpssh -f ${CWD}/router_servers 'killall -9 mongos' > /dev/null
 
-killall -9 mongos #> /dev/null
+# killall -9 mongos #> /dev/null
 
 echo "MongoDB cluster is stopped"
 
 echo "Cleaning the log, config, and data..."
-# mpssh -f ${CWD}/conf_servers "rm -rf ${MONGO_CONF_SRV_DIR} ${MONGO_INSTALL_DIR}" > /dev/null
-# mpssh -f ${CWD}/shard_servers "rm -rf ${MONGO_SHARD_SRV_DIR} ${MONGO_INSTALL_DIR}" > /dev/null
-# mpssh -f ${CWD}/router_servers "rm -rf ${MONGO_ROUTER_SRV_DIR} ${MONGO_INSTALL_DIR}" > /dev/null
+mpssh -f ${CWD}/conf_servers "rm -rf ${MONGO_CONF_SRV_DIR} ${MONGO_INSTALL_DIR}" > /dev/null
+mpssh -f ${CWD}/shard_servers "rm -rf ${MONGO_SHARD_SRV_DIR} ${MONGO_INSTALL_DIR}" > /dev/null
+mpssh -f ${CWD}/router_servers "rm -rf ${MONGO_ROUTER_SRV_DIR} ${MONGO_INSTALL_DIR}" > /dev/null
 
-rm -rf ${MONGO_CONF_SRV_DIR} ${MONGO_INSTALL_DIR} #> /dev/null
-rm -rf ${MONGO_SHARD_SRV_DIR} ${MONGO_INSTALL_DIR} #> /dev/null
-rm -rf ${MONGO_ROUTER_SRV_DIR} ${MONGO_INSTALL_DIR} #> /dev/null
+# rm -rf ${MONGO_CONF_SRV_DIR} ${MONGO_INSTALL_DIR} #> /dev/null
+# rm -rf ${MONGO_SHARD_SRV_DIR} ${MONGO_INSTALL_DIR} #> /dev/null
+# rm -rf ${MONGO_ROUTER_SRV_DIR} ${MONGO_INSTALL_DIR} #> /dev/null
 
 echo "Done cleaning MongoDB..."
