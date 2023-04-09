@@ -5,11 +5,16 @@ The env_var.sh has most of the directory setup information.
 - All the downloaded files are stored in the `$HOME/download` directory.
 - The github scripts are place in the `$HOME/script` directory.
 
+## dependencies
+- ssh should be setup between local host and remote test host
+- remote test host should allow sudo command without password
+- need mpssh from https://github.com/ndenev/mpssh
+
 ## install_scripts
 Script to install all databases.
 ```
 cd install_scripts
-./install_beegfs.sh  
+./install_beegfs.sh
 ./install_montodb.sh mongod
 ./install_montodb.sh mongosh
 ```

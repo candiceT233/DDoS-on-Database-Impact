@@ -8,9 +8,14 @@ logs/
 results/
 saved_results/
 
+# submodules
+tools/
+bin/
+
 # Other files and folders
 .settings/
 .ddos_test_venv/
+
 
 # Executables
 *.swf

@@ -14,12 +14,13 @@ MONGOD_PORT=57040
 MG_SHARD_PORT=37017
 MONGOS_PORT=27017
 
-ATTACK_PORTS=( $MONGOD_PORT $MG_SHARD_PORT $MONGOS_PORT )
+# ATTACK_PORTS=( $MONGOD_PORT $MG_SHARD_PORT $MONGOS_PORT )
+ATTACK_PORTS=( $MONGOD_PORT )
 # L4_METHODS=( UDP TCP CONNECTIONS CPS MCBOT MINECRAFT )
 L4_METHODS=( CONNECTION )
 
 THREADS=64
-DURATION=60
+DURATION=20
 
 attack_host=$(cat $SCRIPT_DIR/ip_files/${num_s}_servers_ip | head -n 1)
 
@@ -67,29 +68,19 @@ ddos_attack () {
 
             echo "Attacking ${attack_host} port $port with method $method"
 
-            # LATEST_DIR="$PAT_COL/results/latest"
-            # sed "s#RESULT_DIR#$LATEST_DIR#g" $SCRIPT_DIR/test_scripts/config.xml > $PAT_POS/config.xml
+            # SIM_TEST_CMD="stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 15s"
+            # python3 $SCRIPT_DIR/tools/MHDDoS/start.py $method $attack_host:$port $THREADS $DURATION
 
-            # TEST_CMD="stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 15s"
-            TEST_CMD="python3 $SCRIPT_DIR/tools/MHDDoS/start.py $method $attack_host:$port $THREADS $DURATION"
+            # # Prepare and run PAT test
+            # TEST_CMD="python3 $SCRIPT_DIR/tools/MHDDoS/start.py $method $attack_host:$port $THREADS $DURATION"
+            # echo "TEST_CMD: $TEST_CMD"
+            # sed "s#TEST_CMD#$TEST_CMD#g" $SCRIPT_DIR/test_scripts/config.template > $PAT_COL/config
+            # sed -i "s#HOSTIP#$attack_host#g" $PAT_COL/config
+            # cd $PAT_COL && ./pat run
 
-            echo "TEST_CMD: $TEST_CMD"
-
-            sed "s#TEST_CMD#$TEST_CMD#g" $SCRIPT_DIR/test_scripts/config.template > $PAT_COL/config
-            sed -i "s#HOSTIP#$attack_host#g" $PAT_COL/config
+            # mv $PAT_COL/results/2023-* $RESULT_DIR/${num_s}_servers_${method}_${port}
+            # echo "$(du -h ../results/${num_s}_servers_${method}_${port}/instruments/result_templatev1.xlsm)"
             
-            cd $PAT_COL && ./pat run
-
-            # python3 $SCRIPT_DIR/start.py $method $attack_host:$port
-            # mkdir -p $RESULT_DIR/${num_s}_servers_${method}_${port}
-            mv $PAT_COL/results/2023-* $RESULT_DIR/${num_s}_servers_${method}_${port}
-            # mv $PAT_COL/results/2023-* mv $PAT_COL/results/latest
-            # cd $PAT_POS && python2 pat-post-process.py
-
-            echo "$(du -h ../results/${num_s}_servers_${method}_${port}/instruments/result_templatev1.xlsm)"
-            
-            #$RESULT_DIR/${num_s}_servers_${method}_${port}
-
             stop_server
 
             sleep 2
@@ -100,6 +91,7 @@ ddos_attack () {
 
 ddos_attack
 
-mkdir $RESULT_DIR/mongodb_${num_s}_servers_${THREADS}t${DURATION}s
-mv $RESULT_DIR/${num_s}_servers_* $RESULT_DIR/mongodb_${num_s}_servers_${THREADS}t${DURATION}s/
+mkdir -p $SCRIPT_DIR/saved_results/mongodb_${num_s}_servers_${THREADS}t${DURATION}s
+mv $RESULT_DIR/${num_s}_servers_* $SCRIPT_DIR/saved_results/mongodb_${num_s}_servers_${THREADS}t${DURATION}s/
+
 

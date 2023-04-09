@@ -23,16 +23,24 @@ MONGODB_CLUSTER=/mnt/mongodb
 num_s="1" # 2, 4, 8?
 cmd=$1
 
+hosts=($(cat $SERVER_HOST_FILE_DIR/${num_s}_servers_ip ))
+echo "hosts = $hosts"
+echo "${hosts[0]}" > $MONGO_SCRIPT_DIR/entry_host
+echo "$MONGO_SCRIPT_DIR/entry_host : $(cat $MONGO_SCRIPT_DIR/entry_host)"
+
 start_mongo_cluster(){
     clean_mongo_cluster
     clear_cache
     # start mongo cluster
-    ${MONGO_SCRIPT_DIR}/start_mongo_cluster.sh
+
+    mpssh -f $MONGO_SCRIPT_DIR/entry_host "${MONGO_SCRIPT_DIR}/start_mongo_cluster.sh"
+    # ${MONGO_SCRIPT_DIR}/start_mongo_cluster.sh
 }
 
 stop_mongo_cluster(){
     # stop mongo cluster
-    ${MONGO_SCRIPT_DIR}/stop_mongo_cluster.sh
+    mpssh -f $MONGO_SCRIPT_DIR/entry_host "${MONGO_SCRIPT_DIR}/stop_mongo_cluster.sh"
+    # ${MONGO_SCRIPT_DIR}/stop_mongo_cluster.sh
 }
 
 clean_mongo_cluster(){
@@ -42,7 +50,7 @@ clean_mongo_cluster(){
 
 clear_cache(){
     # clear server system cache
-    mpssh -f ${MONGO_SCRIPT_DIR}/shard_servers 'sudo su root -c "sync; echo 3 > /proc/sys/vm/drop_caches"'
+    mpssh -f ${SERVER_HOST_FILE_DIR}/${num_s}_servers_ip 'sudo su root -c "sync; echo 3 > /proc/sys/vm/drop_caches"'
     # mpssh -f ${MONGO_SCRIPT_DIR}/shard_servers "sudo fm" > /dev/null 2>&1
     # sudo su root -c "sync; echo 3 > /proc/sys/vm/drop_caches"
 }
