@@ -162,14 +162,14 @@ EOF
 
 # Checking mongod
 echo -e "${GREEN}Checking mongod ...${NC}"
-mpssh -f ${CWD}/conf_servers 'pgrep -la mongod' | sort
-mpssh -f ${CWD}/shard_servers 'pgrep -la mongod' | sort
+$HOME/scripts/mpssh/mpssh -f ${CWD}/conf_servers 'pgrep -la mongod' | sort
+$HOME/scripts/mpssh/mpssh -f ${CWD}/shard_servers 'pgrep -la mongod' | sort
 # pgrep -la mongod | sort
 # pgrep -la mongod | sort
 
 # Checking mongos
 echo -e "${GREEN}Checking mongos ...${NC}"
-mpssh -f ${CWD}/router_servers 'pgrep -la mongos' | sort
+$HOME/scripts/mpssh/mpssh -f ${CWD}/router_servers 'pgrep -la mongos' | sort
 # pgrep -la mongos | sort
 
 echo "MongoDB cluster starts successfully"
