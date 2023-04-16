@@ -41,9 +41,6 @@ cd beegfs
   162 |    int numa = cpu_to_node(current->cpu);
 ```
 
-## redis/rocks_db
-TODO: add a additional database for test
-
 ## tools
 #### PAT
 For measuring system performance (e.g. CPU, memory, and netwrok utilization).
@@ -59,10 +56,9 @@ cd test_scripts
 ./mongodb_attack.sh
 ```
 
-## TODO
-- Do L7 tests if can setup
-- Vary threads number
-- Vary test length
+## Future Work
+- Explore possibility of L7 attacks
+- Additional databases for attack test, for examples Redis, or RocksDB.
 
 
 
