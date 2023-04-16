@@ -4,6 +4,7 @@
 INSTALL_DIR=$HOME/install
 DL_DIR=$HOME/download
 SCRIPT_DIR=$HOME/scripts/DDoS-on-Database-Impact
+TEST_DIR=$SCRIPT_DIR/test_scripts/test1
 RESULT_DIR=$SCRIPT_DIR/results
 SERVER_HOST_FILE_DIR=$SCRIPT_DIR/ip_files
 mkdir -p $RESULT_DIR
@@ -90,7 +91,7 @@ ddos_attack () {
             echo "Attacking ${attack_host} port $port with method $method"
 
             # LATEST_DIR="$PAT_COL/results/latest"
-            # sed "s#RESULT_DIR#$LATEST_DIR#g" $SCRIPT_DIR/test_scripts/config.xml > $PAT_POS/config.xml
+            # sed "s#RESULT_DIR#$LATEST_DIR#g" $TEST_DIR/config.xml > $PAT_POS/config.xml
 
             # TEST_CMD="stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 15s"
             # python3 $SCRIPT_DIR/tools/MHDDoS/start.py $method $attack_host:$port $THREADS $DURATION
@@ -100,7 +101,7 @@ ddos_attack () {
 
             echo "TEST_CMD: $TEST_CMD"
 
-            sed "s#TEST_CMD#$TEST_CMD#g" $SCRIPT_DIR/test_scripts/config.template > $PAT_COL/config
+            sed "s#TEST_CMD#$TEST_CMD#g" $TEST_DIR/config.template > $PAT_COL/config
             sed -i "s#HOSTIP#$attack_host#g" $PAT_COL/config
             
             cd $PAT_COL && ./pat run

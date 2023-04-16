@@ -4,7 +4,9 @@
 INSTALL_DIR=$HOME/install
 DL_DIR=$HOME/download
 SCRIPT_DIR=$HOME/scripts/DDoS-on-Database-Impact
+TEST_DIR=$SCRIPT_DIR/test_scripts/test1
 RESULT_DIR=$SCRIPT_DIR/results
+SERVER_HOST_FILE_DIR=$SCRIPT_DIR/ip_files
 mkdir -p $RESULT_DIR
 rm -rf $RESULT_DIR/*
 
@@ -14,13 +16,14 @@ MONGOD_PORT=57040
 MG_SHARD_PORT=37017
 MONGOS_PORT=27017
 
-# ATTACK_PORTS=( $MONGOD_PORT $MG_SHARD_PORT $MONGOS_PORT )
-ATTACK_PORTS=( $MONGOD_PORT )
-# L4_METHODS=( UDP TCP CONNECTIONS CPS MCBOT MINECRAFT )
-L4_METHODS=( CONNECTION )
+ATTACK_PORTS=( $MONGOD_PORT $MG_SHARD_PORT $MONGOS_PORT )
+L4_METHODS=( UDP TCP CONNECTIONS CPS MCBOT MINECRAFT )
+
+# ATTACK_PORTS=( $MONGOD_PORT )
+# L4_METHODS=( CONNECTION )
 
 THREADS=64
-DURATION=20
+DURATION=60
 
 attack_host=$(cat $SCRIPT_DIR/ip_files/${num_s}_servers_ip | head -n 1)
 
@@ -42,7 +45,7 @@ start_server () {
     cd $SCRIPT_DIR/mongodb
     ./mongodb.sh start
 
-    tail /mnt/mongodb/mongod/mongod.log
+    mpssh -f $SERVER_HOST_FILE_DIR/${num_s}_servers_ip "tail /mnt/mongodb/mongod/mongod.log"
 
     set +x
 }
@@ -54,7 +57,7 @@ stop_server () {
     cd $SCRIPT_DIR/mongodb
     ./mongodb.sh stop
 
-    tail /mnt/mongodb/mongod/mongod.log
+    mpssh -f $SERVER_HOST_FILE_DIR/${num_s}_servers_ip "tail /mnt/mongodb/mongod/mongod.log"
 
     set +x
 }
@@ -71,15 +74,15 @@ ddos_attack () {
             # SIM_TEST_CMD="stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout 15s"
             # python3 $SCRIPT_DIR/tools/MHDDoS/start.py $method $attack_host:$port $THREADS $DURATION
 
-            # # Prepare and run PAT test
-            # TEST_CMD="python3 $SCRIPT_DIR/tools/MHDDoS/start.py $method $attack_host:$port $THREADS $DURATION"
-            # echo "TEST_CMD: $TEST_CMD"
-            # sed "s#TEST_CMD#$TEST_CMD#g" $SCRIPT_DIR/test_scripts/config.template > $PAT_COL/config
-            # sed -i "s#HOSTIP#$attack_host#g" $PAT_COL/config
-            # cd $PAT_COL && ./pat run
+            # Prepare and run PAT test
+            TEST_CMD="python3 $SCRIPT_DIR/tools/MHDDoS/start.py $method $attack_host:$port $THREADS $DURATION"
+            echo "TEST_CMD: $TEST_CMD"
+            sed "s#TEST_CMD#$TEST_CMD#g" $TEST_DIR/config.template > $PAT_COL/config
+            sed -i "s#HOSTIP#$attack_host#g" $PAT_COL/config
+            cd $PAT_COL && ./pat run
 
-            # mv $PAT_COL/results/2023-* $RESULT_DIR/${num_s}_servers_${method}_${port}
-            # echo "$(du -h ../results/${num_s}_servers_${method}_${port}/instruments/result_templatev1.xlsm)"
+            mv $PAT_COL/results/2023-* $RESULT_DIR/${num_s}_servers_${method}_${port}
+            echo "$(du -h ../results/${num_s}_servers_${method}_${port}/instruments/result_templatev1.xlsm)"
             
             stop_server
 
@@ -91,7 +94,7 @@ ddos_attack () {
 
 ddos_attack
 
-mkdir -p $SCRIPT_DIR/saved_results/mongodb_${num_s}_servers_${THREADS}t${DURATION}s
-mv $RESULT_DIR/${num_s}_servers_* $SCRIPT_DIR/saved_results/mongodb_${num_s}_servers_${THREADS}t${DURATION}s/
+# mkdir -p $SCRIPT_DIR/saved_results/mongodb_${num_s}_servers_${THREADS}t${DURATION}s
+# mv $RESULT_DIR/${num_s}_servers_* $SCRIPT_DIR/saved_results/mongodb_${num_s}_servers_${THREADS}t${DURATION}s/
 
 
