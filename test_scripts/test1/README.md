@@ -12,11 +12,7 @@ HELPERD_PORT=8006
 MGMTD_PORT=8008
 ```
 Currently tested working Layer4 methods:
-`TCP UDP UDP TCP MCBOT MINECRAFT CPS `
-TODO: 
-- L4 test CONNECTION again
-- Test untested ports (CLIENT_PORT, HELPERD_PORT, MGMTD_PORT)
-- Try setup L7 attacks
+`TCP UDP MCBOT MINECRAFT CPS `
 
 
 ## MongoDB Note
@@ -28,5 +24,7 @@ MONGOS_PORT=27017
 ```
 Currently tested working Layer4 methods:
 `UDP TCP CONNECTIONS CPS MCBOT MINECRAFT `
-TODO: 
-- Try setup L7 attacks
+
+
+## Future
+Try setup L7 attacks

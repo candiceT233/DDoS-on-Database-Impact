@@ -82,7 +82,7 @@ ddos_attack () {
             cd $PAT_COL && ./pat run
 
             mv $PAT_COL/results/2023-* $RESULT_DIR/${num_s}_servers_${method}_${port}
-            echo "$(du -h ../results/${num_s}_servers_${method}_${port}/instruments/result_templatev1.xlsm)"
+            echo "$(du -h $RESULT_DIR/${num_s}_servers_${method}_${port}/instruments/result_templatev1.xlsm)"
             
             stop_server
 

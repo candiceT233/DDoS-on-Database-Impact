@@ -112,7 +112,7 @@ ddos_attack () {
             # mv $PAT_COL/results/2023-* mv $PAT_COL/results/latest
             # cd $PAT_POS && python2 pat-post-process.py
 
-            echo "$(du -h ../results/${num_s}_servers_${method}_${port}/instruments/result_templatev1.xlsm)"
+            echo "$(du -h $RESULT_DIR/${num_s}_servers_${method}_${port}/instruments/result_templatev1.xlsm)"
             
             #$RESULT_DIR/${num_s}_servers_${method}_${port}
 
