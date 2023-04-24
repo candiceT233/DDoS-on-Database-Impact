@@ -49,7 +49,6 @@ For generating DDOS attacks on started database.
 
 ## test_scripts
 Testscripts added for MongoDB and BeeGFS. \
-(TODO: may add 3rd database test).
 ```
 cd test_scripts
 ./beegfs_attack.sh  
